@@ -12,3 +12,14 @@ ON c.country_id = co.country_id;
 
 -- 2. Write a query to display how much business, in dollars, each store brought in
 
+SELECT s.store_id, sum(p.amount) as total_income_per_store
+FROM sakila.store s 
+JOIN sakila.staff st
+ON s.store_id = st.store_id
+JOIN sakila.payment p 
+ON st.staff_id = p.staff_id
+GROUP BY s.store_id;
+
+-- 3. Which film categories are longest?
+
+
