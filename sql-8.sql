@@ -31,3 +31,32 @@ GROUP BY c.name
 ORDER BY length DESC;
 
 -- 4. Display the most frequently rented movies in descending order
+SELECT f.title, r.rental_id
+FROM sakila.film f
+JOIN sakila.inventory i
+ON f.film_id = i.film_id
+JOIN sakila.rental r
+ON i.inventory_id = r.inventory_id
+GROUP BY f.title
+ORDER BY r.rental_id DESC;
+
+
+-- 5. List the top five genres in gross revenue in descending order
+SELECT c.name, sum(p.amount) as gross_revenue
+FROM sakila.category c
+JOIN sakila.film_category fc
+ON c.category_id = fc.category_id
+JOIN sakila.film f
+ON fc.film_id = f.film_id
+JOIN sakila.inventory i
+ON f.film_id = i.film_id
+JOIN sakila.rental r
+ON i.inventory_id = r.inventory_id
+JOIN sakila.payment p
+ON r.rental_id = p.rental_id
+GROUP BY c.name
+ORDER BY p.payment_id DESC
+LIMIT 5;
+
+
+
