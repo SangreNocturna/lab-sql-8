@@ -58,5 +58,33 @@ GROUP BY c.name
 ORDER BY p.payment_id DESC
 LIMIT 5;
 
+-- 6. Is "Academy Dinosaur" available for rent from Store 1?
+SELECT st.store_id, f.title
+FROM sakila.category c
+JOIN sakila.film_category fc
+ON c.category_id = fc.category_id
+JOIN sakila.film f
+ON fc.film_id = f.film_id
+JOIN sakila.inventory i
+ON f.film_id = i.film_id
+JOIN sakila.store st
+WHERE f.title = 'ACADEMY DINOSAUR'
+GROUP BY st.store_id;
+
+-- 7. Get all pairs of actors that worked together
+
+
+-- 8. Get all pairs of customers that have rented the same film more than 3 times
+
+
+-- 9. For each film, list actor that has acted in more films
+SELECT f.title, a.first_name, a.last_name, count(a.last_name) as apariciones
+FROM sakila.film f
+JOIN sakila.film_actor fa
+ON f.film_id = fa.film_id
+JOIN sakila.actor a
+ON fa.actor_id = a.actor_id
+GROUP BY f.title
+ORDER BY count(a.last_name) DESC;
 
 
