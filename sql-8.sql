@@ -1,4 +1,4 @@
-use sakila;
+USE sakila;
 
 -- 1. Write a query to display for each store its store ID, city, and country
 SELECT s.store_id, c.city, co.country
@@ -21,5 +21,13 @@ ON st.staff_id = p.staff_id
 GROUP BY s.store_id;
 
 -- 3. Which film categories are longest?
+SELECT c.name, length
+FROM sakila.film f
+JOIN sakila.film_category fc
+ON f.film_id = fc.film_id
+JOIN sakila.category c
+ON fc.category_id = c.category_id
+GROUP BY c.name
+ORDER BY length DESC;
 
-
+-- 4. Display the most frequently rented movies in descending order
